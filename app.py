@@ -1,5 +1,5 @@
 import streamlit as st
-from google import genai
+import google.generativeai as genai
 
 # ================== CẤU HÌNH ==================
 client = genai.Client(
@@ -66,3 +66,4 @@ if user_input:
 
     with st.chat_message("assistant"):
         st.markdown(reply)
+
