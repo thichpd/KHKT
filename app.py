@@ -2,10 +2,7 @@ import streamlit as st
 import google.generativeai as genai
 
 # ================== CẤU HÌNH ==================
-client = genai.Client(
-    api_key=st.secrets["google_api_key"],
-    http_options={"api_version": "v1"}
-)
+genai.configure(api_key=st.secrets["GOOGLE_API_KEY"])
 
 SYSTEM_PROMPT = """
 Bạn là 'Thầy giáo ảo Tin Học'.
@@ -18,7 +15,7 @@ Quy tắc:
 4. Luôn động viên học sinh.
 """
 
-MODEL_NAME = "models/gemini-2.5-flash"
+MODEL_NAME = "gemini-pro"
 MAX_HISTORY = 6
 
 # ================== GIAO DIỆN ==================
@@ -50,12 +47,10 @@ if user_input:
     for msg in recent_history:
         prompt += f"{msg['role']}: {msg['content']}\n"
 
-    # ===== GỌI GEMINI =====
+    # ===== GỌI GEMINI (CÁCH ĐÚNG) =====
     try:
-        response = client.models.generate_content(
-            model=MODEL_NAME,
-            contents=prompt
-        )
+        model = genai.GenerativeModel(MODEL_NAME)
+        response = model.generate_content(prompt)
         reply = response.text
     except Exception as e:
         reply = f"❌ Lỗi Gemini API: {e}"
