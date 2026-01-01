@@ -47,7 +47,7 @@ if user_input:
     for msg in recent_history:
         prompt += f"{msg['role']}: {msg['content']}\n"
 
-    # ===== GỌI GEMINI (CÁCH ĐÚNG) =====
+    # ===== GỌI GEMINI (CHUẨN) =====
     try:
         model = genai.GenerativeModel(MODEL_NAME)
         response = model.generate_content(prompt)
@@ -61,5 +61,6 @@ if user_input:
 
     with st.chat_message("assistant"):
         st.markdown(reply)
+
 
 
