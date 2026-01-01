@@ -15,7 +15,7 @@ Quy tắc:
 4. Luôn động viên học sinh.
 """
 
-MODEL_NAME = "gemini-2.0-*"
+MODEL_NAME = "gemini-2.5-pro"
 MAX_HISTORY = 6
 
 # ================== GIAO DIỆN ==================
@@ -61,6 +61,7 @@ if user_input:
 
     with st.chat_message("assistant"):
         st.markdown(reply)
+
 
 
 
